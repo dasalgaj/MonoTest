@@ -1,0 +1,73 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<VehicleServices.Models.VehicleMake>
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Controller"] = "Vehicle";
+    ViewData["Action"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Vehicle List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary">
+                Create new vehicle
+            </a>
+        </div>
+    </div>
+
+    <br />
+
+    <form asp-action="Index" method="get">
+        <div>
+            <p>
+                Find Make: <input type="text" name="searchString" value="@ViewBag.CurrentFilter" />
+                <input type="submit" value="Search" class="btn btn-info" />
+                <a asp-action="Index">Remove filter</a>
+            </p>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" 
+                        asp-route-sortOrder="@ViewBag.NameSortParam"
+                        asp-route-pageNumber="@Model.PageNumber">
+                        Name
+                    </a>
+                </th>
+                <th>
+                    Abrv
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.Data)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.name
+                    </td>
+                    <td width="30%">
+                        @obj.abrv
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@obj.id"
+                            class="btn btn-primary mx-2">Edit</a>
+                            <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@obj.id"
+                               class="btn btn-danger mx-2">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="PaginationPartial" view-data="ViewData" model="Model" />
+</div>

@@ -1,0 +1,25 @@
+﻿@model VehicleServices.Models.VehicleModel
+
+<form method="post" asp-action="Edit" style="width: 60%">
+	<input asp-for="make_id" hidden />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit vehicle</h2>
+			<hr />
+		</div>
+		<div class="mb-3">
+			<label asp-for="name"></label>
+			<input asp-for="name" class="form-control"/>
+			<span asp-validation-for="name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="abrv"></label>
+			<input asp-for="abrv" class="form-control"/>
+			<span asp-validation-for="abrv" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Model" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back
+		</a>
+	</div>
+</form>
